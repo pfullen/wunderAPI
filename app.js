@@ -1,20 +1,30 @@
 $(document).ready( function() {
+	
+	 // input from City & State inputs	
 	$('.weather-getter').submit( function(event){
 		// zero out results if previous search has run
 		$('.results').html('');
 		// get the value of the tags the user submitted
 		var city = $(this).find("input[name='city']").val();
 		var state = $(this).find("select[name='state']").val();
-		alert(city + ", " + state);
+		
 		var urlResult = getURL(city, state);
 		console.log(urlResult);
 		getWeather(urlResult);
 	});
-	
+
+   //  get input from PWS input
+   $('.pws-getter').submit( function(event){
+    	$('.results').html('');
+    	var pws = $(this).find("input[name='pws']").val();
+    	console.log('Hello' + pws);
+      var urlResult2 = getURL2(pws);
+      getWeather(urlResult2);
+
 });
 
 
-
+// Function to format URL for City and State
 function getURL(city, state) {
 
 var url = "";
@@ -27,6 +37,16 @@ var url = "";
 }
 
 
+// Function to format URL for PSW 
+
+function getURL2(pws) {
+var url = "";
+
+url =   "http://api.wunderground.com/api/3ca9d0b73a14c32b/conditions/q/pws:" + pws + ".json" ;
+console.log("PWS URL is " + url);
+return url;
+
+}
 
 // this function takes the results from Weather Underground
 // and creates new result to be appended to DOM
@@ -105,4 +125,4 @@ var getWeather = function(url) {
 };
 
 
-
+});
